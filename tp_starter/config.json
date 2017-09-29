@@ -1,0 +1,5 @@
+{
+"port": 1337,
+"contentDirectory": "/home/ubuntu/Desktop/NodeJs/Projet/asi2-node/tp_starter/uploads",
+"presentationDirectory": "/home/ubuntu/Desktop/NodeJs/Projet/asi2-node/tp_starter/presentation_content"
+}
