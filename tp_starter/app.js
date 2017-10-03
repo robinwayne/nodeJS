@@ -52,14 +52,13 @@ app.use("/loadPres", function(req, res){
 			console.log(maMap);
 
 			res.end(JSON.stringify(maMap));
-			sleep.msleep(50);
 
 		}); 
 		
 		});
 
 	});
-	//res.send(maMap);
+	
 });
 
 app.use("/savePres", function(req, res){
