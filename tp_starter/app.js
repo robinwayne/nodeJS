@@ -34,12 +34,12 @@ app.use("/watch", express.static(path.join(__dirname, "public/watch")));
 app.use("/loadPres", function(req, res){
 	
 	var filenameArray = [];
-	fs.readdir(CONFIG.presentationDirectory, function(err, data){
+	fs.readdir(CONFIG.presentationDirectory, function(err, files){
 	if(!!err){
 		console.error(err);
 		return;
 	}
-	data.forEach(function(fileName){
+	files.forEach(function(fileName){
 		filenameArray.push(fileName);
 		fs.readFile(CONFIG.presentationDirectory + "/" + fileName,'utf8', function(err, data){
 			if(!!err){
