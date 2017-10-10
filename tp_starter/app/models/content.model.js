@@ -98,7 +98,7 @@ ContentModel.update=function(id, cb){
 
 ContentModel.delete=function(id, cb){
 
-    pathName = CONFIG.contentDirectory + '/' + id;
+    var pathName = CONFIG.contentDirectory + '/' + id;
     fs.unlinkSync(pathName);
     fs.unlinkSync(pathName + '.meta.json');
     console.log(pathName);

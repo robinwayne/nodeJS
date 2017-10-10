@@ -5,6 +5,7 @@ var CONFIG = require("./config.json");
 var defaultRoute = require("./app/routes/default.route.js");
 var path = require("path");
 var fs = require("fs");
+var bodyParser = require("body-parser");
 var maMap = new Map();
 var contenu;
 
@@ -69,6 +70,11 @@ app.use("/savePres", function(req, res){
 	});
 	res.end();
 });
+
+//question 15
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 server.listen(CONFIG.port, function(){
 	var host = this.address().address;
