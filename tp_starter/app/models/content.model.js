@@ -52,31 +52,57 @@ ContentModel.create=function(contentModel, cb) {
     cb();
 };
 
-ContentModel.read=function(contentModel, cb){
-	var contentModel = new ContentModel();
-	var pathName = CONFIG.contentDirectory + '/' + contentModel.id + '.meta.json';
+
+
+
+ContentModel.read=function(id, cb){
+ 
+    var pathName = CONFIG.contentDirectory + '/' + id + '.meta.json';
+    
 	fs.readFile(pathName, function(err, data){
-		if (!! err) throw err;
-		return (contentModel = JSON.parse(data));
-	});
+        if (!! err) throw err;
+        
+        var data_parsed = JSON.parse(data);
+        var contentModel = new ContentModel(data_parsed.type, data_parsed.id, data_parsed.title, data_parsed.src, 
+            data_parsed.fileName, data_parsed._data);
+        console.log(contentModel._data);    
+		return contentModel;
+    });
+   
 	cb();
 };
 
 
-ContentModel.update=function(contentModel, cb){
-	var data;
-	data=contentModel.getData;
-	var pathName = CONFIG.contentDirectory + '/';
-	var metadata = JSON.stringify(contentModel);
-	if(data !== 0 && data>0){
 
-	}
 
+
+ContentModel.update=function(id, cb){
+    
+    var pathName = CONFIG.contentDirectory + '/' + id + '.meta.json';
+    
+    fs.readFile(pathName, function(err, data){
+        if (!! err) throw err;
+        
+        var data_parsed = JSON.parse(data);
+        if(data_parsed._data != NULL && length(data_parsed)>0){
+            fs.writeFile(CONFIG.contentDirectory + '/' + data_parsed.fileName, data_parsed._data, 'UTF-8');
+            var metadata = JSON.stringify(data_parsed);
+            fs.writeFile(CONFIG.contentDirectory + '/' + id + '.meta.json', metaData, 'UTF-8');
+        }
+    });
+    
 	cb();
-
-
-
 
 }
 
+
+ContentModel.delete=function(id, cb){
+
+    pathName = CONFIG.contentDirectory + '/' + id;
+    fs.unlinkSync(pathName);
+    fs.unlinkSync(pathName + '.meta.json');
+    console.log(pathName);
+    cb();
+
+}
 
